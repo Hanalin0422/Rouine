@@ -16,3 +16,10 @@ express, ejs, nodemon, body-parser, express-ejs-layouts, util</br>
 mongoose
 ##### 로그인, 보안
 bcryptjs, passport, connect-flash, passport-local
+
+---
+###### 하다 보니 안되는 부분
+1. 로그인 기능을 구현하는데 req.body.username이 없는데도 error로 안 잡힌다.
+왜인지는 계속 분석해봤으나 아직 확인을 못했다.
+로그인을 할때 아이디를 입력하지 않거나 비밀번호만 입력하고 제출을 눌렀을 경우 입력이 안되었다고 알림을 주고 싶은데 error로 인식을 하지 못하고 그냥 redirect만 진행이된다.
+아이디와 비밀번호를 잘못 입력할 경우 정확하게 입력하라는 경고도 보내고 싶다.
