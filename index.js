@@ -18,8 +18,6 @@ app.set('view engine','ejs');
 app.set('layout', './layout/full-width');
 app.set("layout extractScripts",true);
 app.use(expressLayouts);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
 
 // routes setting
 app.use('/', require('./routes/main'));
