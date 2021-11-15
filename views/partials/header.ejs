@@ -2,6 +2,9 @@
 <header id="header" class="alt">
     <a href="/" class="logo"><strong>ROUINE</strong><span>YOUR STYLIST</span></a>
     <nav>
+        <% if(isAuthenticated){ %>
+            <span><%= currentUser.username %>님 환영합니다 :) </span>
+        <% } %>
         <a href="#menu">Menu</a>
     </nav>
 </header>
@@ -10,12 +13,16 @@
 <nav id="menu">
     <ul class="links">
         <li><a href="/">Home</a></li>
-        <li><a href="/landing">Landing</a></li>
+        <li><a href="/users/signup">Sign Up</a></li>
         <li><a href="/generic">Generic</a></li>
         <li><a href="/elements">Elements</a></li>
     </ul>
     <ul class="actions stacked">
         <li><a href="#" class="button primary fit">Get Started</a></li>
-        <li><a href="#" class="button fit">Log In</a></li>
+        <% if(isAuthenticated){ %>
+            <li><button type="button" class="button fit" onclick="location.href='/users/logout'">Log Out</button></li>
+        <% } else { %>
+            <li><a href="/users/login" class="button fit">Log In</a></li>
+        <% } %>
     </ul>
 </nav>

@@ -1,0 +1,65 @@
+<!-- Main -->
+<div id="main" class="alt">
+	<!-- One -->
+		<section id="one">
+			<div class="inner">
+				<header class="major">
+					<h1>With US</h1>
+				</header>
+
+				<!-- Content -->
+					<h2 id="content">회원 가입</h2>
+                    <form action="/users" method="post">
+                        <div class="col-6 col-12-xsmall">
+                            <label for="username">ID</label>
+                            <input type="text" name="username" id="username" value="<%= user.username %>" placeholder="ID" />
+                            <% if(errors.username){ %>
+                                <span><%= errors.username.message %></span>
+                            <% } %>
+                        </div>
+                    </br>
+                        <div class="col-6 col-12-xsmall">
+                            <label for="password">PASSWORD</label>
+                            <input type="password" name="password" id="password" value="" placeholder="Password" />
+                            <% if(errors.password){ %>
+                                <span><%= errors.password.message %></span>
+                            <% } %>
+                        </div>
+                    </br>
+                        <div class="col-6 col-12-xsmall">
+                            <label for="passwordConfirmation">PASSWORD CONFIRMATION</label>
+                            <input type="password" name="passwordConfirmation" id="passwordConfirmation" value="" placeholder="Password Confirmation"/>
+                            <% if(errors.passwordConfirmation){ %>
+                                <span><%= errors.passwordConfirmation.message %></span>
+                            <% } %>
+                        </div>
+                    </br>
+                        <div class="col-6 col-12-xsmall">
+                            <label for="name">NAME</label>
+                            <input type="text" name="name" id="name" value="<%= user.name %>" placeholder="Name" />
+                            <% if(errors.name){ %>
+                                <span><%= errors.name.message %></span>
+                            <% } %>
+                        </div>
+                    </br>
+                        <div class="col-6 col-12-xsmall">
+                            <label for="email" >Email</label>
+                            <input type="text" name="email" id="email" value="<%= user.email %>" placeholder="Email@mail.com" />
+                            <% if(errors.email){ %>
+                                <span><%= errors.email.message %></span>
+                            <% } %>
+                        </div>
+                    </br>
+                        <div class="col-12">
+                            <ul class="actions">
+                                <li><button type="submit" value="Send Message" class="primary">Submit</button></li> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="/" class="button primary">Home</a>
+                            </ul>
+                        </div>
+                    </form>
+            </div>
+        </section>
+</div>
+
+
+                   

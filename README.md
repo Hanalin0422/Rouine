@@ -10,4 +10,9 @@
 node.js, ejs, css, javascript, mongoose
 
 ### 사용 모듈
-express, ejs, nodemon, body-parser, express-ejs-layouts
+##### 기본
+express, ejs, nodemon, body-parser, express-ejs-layouts, util</br>
+##### 디비
+mongoose
+##### 로그인, 보안
+bcryptjs, passport, connect-flash, passport-local

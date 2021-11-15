@@ -1,0 +1,45 @@
+ <!-- Main -->
+<div id="main" class="alt">
+	<!-- One -->
+		<section id="one">
+			<div class="inner">
+				<header class="major">
+					<h1>LOG IN</h1>
+				</header>
+
+            <!-- Content -->
+                <div class="row">
+                    <form action="/users/login" method="post">
+                        <div class="col-6 col-12-small">
+                            <h3>Thank You For Being With Us!</h3>
+                            <div class="col-6 col-12-xsmall">
+                                <label for="username">ID</label>
+                                <input type="text" name="username" id="username" value="<%= username %>" placeholder="ID">
+                                <% if(errors.username){ %>
+                                    <span><%= errors.username.message %></span>
+                                <% } %>
+                            </div>
+                        </br>
+                            <div class="col-6 col-12-xsmall">
+                                <label for="password">PASSWORD</label>
+                                <input type="password" name="password" id="password" placeholder="Password">
+                                <% if(errors.password){ %>
+                                <span><%= errors.password.message %></span>
+                                <% } %>
+                            </div>
+                        </br></br>
+                            <div class="col-6 col-12-xsmall">
+                                <ul class="actions">
+                                    <li><button type="submit" value="Send Message" class="primary">submit</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <div class="col-6 col-12-small">
+                        <img src="/public/images/rouinePink.png" style="position: relative; left: 15%; bottom: 20%;">
+                    </div>
+                </div>
+        </section>
+</div>
+
