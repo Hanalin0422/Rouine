@@ -16,7 +16,7 @@
                                 <label for="username">ID</label>
                                 <input type="text" name="username" id="username" value="<%= username %>" placeholder="ID">
                                 <% if(errors.username){ %>
-                                    <span><%= errors.username.message %></span>
+                                    <span><%= errors.username %></span>
                                 <% } %>
                             </div>
                         </br>
@@ -24,13 +24,17 @@
                                 <label for="password">PASSWORD</label>
                                 <input type="password" name="password" id="password" placeholder="Password">
                                 <% if(errors.password){ %>
-                                <span><%= errors.password.message %></span>
+                                <span><%= errors.password %></span>
                                 <% } %>
                             </div>
-                        </br></br>
+                        </br>
+                            <% if(errors.login){ %>
+                                <span><%= errors.login %></span></br>
+                            <% } %>
+                        </br>
                             <div class="col-6 col-12-xsmall">
                                 <ul class="actions">
-                                    <li><button type="submit" value="Send Message" class="primary">submit</li>
+                                    <li><button type="submit" class="primary">submit</li>
                                 </ul>
                             </div>
                         </div>
