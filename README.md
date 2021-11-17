@@ -17,6 +17,13 @@ mongoose
 ##### 로그인, 보안
 bcryptjs, passport, connect-flash, passport-local
 
+***
+##### 기능 구현
+[x] 로그인 기능
+[ ] 게시판 기능
+[ ] 관리자 페이지
+[ ] teachable machine 연동
+
 ---
 ###### 하다 보니 안되는 부분
 1. 로그인 기능을 구현하는데 req.body.username이 없는데도 error로 안 잡힌다.
