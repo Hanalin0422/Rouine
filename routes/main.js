@@ -13,6 +13,15 @@ router.get('/', function(req, res){
     });
 });
 
+router.get('/teachMachine', function(req, res){
+    var username = req.flash('username')[0];
+    var errors = req.flash('errors')[0] || {};
+    res.render('main/teachMachine', {
+        username:username,
+        errors:errors
+    });
+});
+
 router.get('/generic', function(req, res){
     var username = req.flash('username')[0];
     var errors = req.flash('errors')[0] || {};
