@@ -1,15 +1,118 @@
-<div>Teachable Machine Image Model</div>
-<button type="button" onclick="init()">Start</button>
-<div id="webcam-container"></div>
-<div id="label-container"></div>
+
+<head>
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <style>
+      .loading {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+
+<section id="banner" class="style2">
+	<div class="inner">
+		<span class="image">
+			<img src="../../public/images/pic06.jpg" alt="" />
+		</span>
+		<header class="major">
+			<h1>얼굴형 확인하기</h1>
+		</header>
+		<div class="content">
+			<p>사용 방법 : <br />
+            1. 자신의 사진을 추가한다. <br />
+            2. 5초 정도 기다려서 결과를 확인한다. </p>
+		</div>
+	</div>
+</section>
+
+
+<div id="content" style="text-align: center;">
+        <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <div class="file-upload">
+            <div class="image-upload-wrap">
+                <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )" style="margin-top: 5%; margin-bottom: 5%; margin-left: 22%">Add Image</button>
+                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*"/>  
+            </div>
+              
+           
+            <div class="file-upload-content">
+                <img class="file-upload-image" id="face-image" src="../../public/images/download.png" alt="your image" style="width: 10%; height: 30%; margin-top: 5%;"/><br /><br />
+
+                <div id="Load" style="display: none;">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-10x fa-spin"></i>
+                    </div>
+                    <p>당신의 얼굴형을 분석중입니다.</p>
+                </div>
+                
+                
+                <p class="result-message" style="font-size: xx-large;"></p>
+                <div id="label-container"></div><br />
+                <div class="image-title-wrap">
+                    <button type="button" onclick="removeUpload()" class="remove-image" style="margin-bottom: 5%;">Remove <span
+                            class="image-title">Uploaded Image</span></button><br />
+                    <a href="/face_information" class="button primary" style="margin-bottom: 10%;">얼굴형 정보 보러가기</a> 
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.image-upload-wrap').hide();
+                $('#Load').show();
+                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-content').show();
+                $('.image-title').html(input.files[0].name);
+                
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+            init().then(()=>{
+                predict();
+                $('.result-message').show();
+                $('#label-container').show();
+                $('#Load').hide();
+            });
+        } else {
+            removeUpload();
+        }
+    }
+
+    function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+        $('.image-upload-wrap').show();
+        $('.result-message').hide();
+        $('#label-container').hide();
+    }
+    $('.image-upload-wrap').bind('dragover', function () {
+        $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+        $('.image-upload-wrap').removeClass('image-dropping');
+    });
+
+</script>
 <script type="text/javascript">
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
     // the link to your model provided by Teachable Machine export panel
-    const URL = "./my_model/";
+    const URL = "https://teachablemachine.withgoogle.com/models/t_37NJLNj/";
 
     let model, webcam, labelContainer, maxPredictions;
 
@@ -25,34 +128,63 @@
         model = await tmImage.load(modelURL, metadataURL);
         maxPredictions = model.getTotalClasses();
 
-        // Convenience function to setup a webcam
-        const flip = true; // whether to flip the webcam
-        webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
-        await webcam.setup(); // request access to the webcam
-        await webcam.play();
-        window.requestAnimationFrame(loop);
-
-        // append elements to the DOM
-        document.getElementById("webcam-container").appendChild(webcam.canvas);
         labelContainer = document.getElementById("label-container");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
+            
             labelContainer.appendChild(document.createElement("div"));
         }
+        
     }
-
-    async function loop() {
-        webcam.update(); // update the webcam frame
-        await predict();
-        window.requestAnimationFrame(loop);
-    }
-
     // run the webcam image through the image model
     async function predict() {
         // predict can take in an image, video or canvas html element
-        const prediction = await model.predict(webcam.canvas);
+        var image = document.getElementById("face-image")
+        const prediction = await model.predict(image, false);
+        prediction.sort((a, b) => parseFloat(b.probability) - parseFloat(a.probability));
+
+        var resultMessege;
+        switch(prediction[0].className){
+            case "긴얼굴형":
+                resultMessege = "당신은 긴얼굴형입니다!";
+                break;
+            case "마름모형":
+                resultMessege = "당신은 마름모형입니다!";
+                break;
+            case "옆사각형":
+                resultMessege = "당신은 옆사각형입니다!";
+                break;
+            case "하트형":
+                resultMessege = "당신은 하트형입니다!";
+                break;
+            case "네모형(사각형)":
+                resultMessege = "당신은 네모형(사각형)입니다!";
+                break;
+            case "땅콩형":
+                resultMessege = "당신은 땅콩형입니다!";
+                break;
+            case "육각형":
+                resultMessege = "당신은 육각형입니다!";
+                break;
+            case "역삼각형":
+                resultMessege = "당신은 역삼각형입니다!";
+                break;
+            case "둥근형":
+                resultMessege = "당신은 둥근형입니다!";
+                break;
+            case "계란형":
+                resultMessege = "당신은 계란형입니다!";
+                break;
+            case "계란턱형":
+                resultMessege = "당신은 계란턱형입니다!";
+                break;
+            default:
+                resultMessege = "알수없음";
+                break;
+        }
+        $('.result-message').html(resultMessege);
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
-                prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                prediction[i].className + ": " + prediction[i].probability.toFixed(2) * 100 + "%";
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
     }

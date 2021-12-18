@@ -46,6 +46,7 @@ app.use(expressLayouts);
 // routes setting
 app.use('/', require('./routes/main'));
 app.use('/users', require('./routes/users'));
+app.use('/boards', require('./routes/boards'));
 
 
 // port setting

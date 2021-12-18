@@ -16,38 +16,42 @@ router.get('/', function(req, res){
 router.get('/teachMachine', function(req, res){
     var username = req.flash('username')[0];
     var errors = req.flash('errors')[0] || {};
-    res.render('main/teachMachine', {
-        username:username,
-        errors:errors
-    });
-});
-
-router.get('/generic', function(req, res){
-    var username = req.flash('username')[0];
-    var errors = req.flash('errors')[0] || {};
-    res.render('main/generic', {
-        username:username,
-        errors:errors
-    });
-});
-
-router.get('/landing', function(req, res){
-    var username = req.flash('username')[0];
-    var errors = req.flash('errors')[0] || {};
-    res.render('main/landing', {
-        username:username,
-        errors:errors
-    });
-});
-
-router.get('/elements', function(req, res){
-    var username = req.flash('username')[0];
-    var errors = req.flash('errors')[0] || {};
-    res.render('main/elements', {
-        username:username,
-        errors:errors
-    });
-});
+    if(!req.user){
+        res.send("<script>alert('로그인을 진행해주세요!'); location.href='/';</script>");
+    }else{
+        res.render('main/teachMachine', {
+            username:username,
+            errors:errors
+        });
+    }
     
+});
+
+router.get('/face_information', function(req, res){
+    var username = req.flash('username')[0];
+    var errors = req.flash('errors')[0] || {};
+    if(!req.user){
+        res.send("<script>alert('로그인을 진행해주세요!'); location.href='/';</script>");
+    }else{
+        res.render('main/face_information', {
+            username:username,
+            errors:errors
+        });
+    }
+});
+
+router.get('/board', function(req, res){
+    var username = req.flash('username')[0];
+    var errors = req.flash('errors')[0] || {};
+
+        res.render('main/board', {
+            username:username,
+            errors:errors
+        });
+
+});
+
+
+
 
 module.exports = router;
