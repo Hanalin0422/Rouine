@@ -1,0 +1,32 @@
+<!-- Main -->
+	<div id="main" class="alt">
+
+		<!-- One -->
+			<section id="one">
+				<div class="inner">
+					<header class="major">
+						<h1>게시판</h1>
+					</header>
+
+				</div>
+			</section>
+			<form action="/boards" method="post">
+				<div class="col-12" style="width: 70%; margin: 0 auto;">
+					<input type="text" name="title" id="title" placeholder="제목을 입력해주세요" style="margin-top: 5%;"/><br>
+					<% if(errors.title){ %>
+						<span><%= errors.title.message %></span>
+					<% } %>
+				</div>
+				<div class="col-12" style="width: 70%; margin: 0 auto;">
+					<textarea name="contents" id="contents" placeholder="의견을 입력해주세요!" rows="10"></textarea>
+					<% if(errors.contents){ %>
+						<span><%= errors.contents.message %></span>
+					<% } %>
+				</div>
+				<div class="col-12" style="text-align: right; margin-right: 10%; margin: 5%;">
+					<button type="submit" class="primary">글 등록하기</button>
+					<button type="button" onclick="location.href='/boards/boardlist'">내가 쓴 글 보러가기</button>
+				</div>
+			</form>
+			
+	</div>
