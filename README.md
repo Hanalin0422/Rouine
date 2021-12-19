@@ -7,13 +7,13 @@
 
 ---
 ### 기술 스택
-node.js, ejs, css, javascript, mongoose
+node.js, ejs, css, javascript, mongoDB
 
 ### 사용 모듈
 ##### 기본
 express, ejs, nodemon, body-parser, express-ejs-layouts, util</br>
 ##### 디비
-mongoDB
+mongoose
 ##### 로그인, 보안
 bcryptjs, passport, connect-flash, passport-local
 
