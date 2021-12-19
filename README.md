@@ -20,9 +20,8 @@ bcryptjs, passport, connect-flash, passport-local
 ***
 ##### 기능 구현
 - [x] 로그인 기능</br>
-- [ ] 게시판 기능</br>
-- [ ] 관리자 페이지</br>
-- [ ] teachable machine 연동</br>
+- [x] 게시판 기능</br>
+- [x] teachable machine 연동</br>
 
 ---
 ###### 하다 보니 안되는 부분
